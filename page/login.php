@@ -3,8 +3,10 @@
         <h2 class="head__title"><?= $title ?></h2>
         <p class="head__date"><?= $date ?></p>
     </section>
-
-    <form action="" class="form" method="post">
+    <? if ($_GET['error'] === 'login') : ?>
+        <p style="color: red">Не верный логин или пароль</p>
+    <? endif; ?>
+    <form action="./includes/userConfig/userLogin.php" class="form" method="post">
         <label class="form__label">
             <span class="form__text">Логин</span>
             <input type="text" class="form__input" name="login" autocomplete="off">

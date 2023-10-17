@@ -26,3 +26,82 @@ function userReg($login, $pass, $name, $path)
     }
     return $result;
 }
+
+function userLogin($login, $pass)
+{
+    $login = strip_tags($login);
+    $pdo = db();
+    $query = "SELECT `user_id`, `user_login`, `user_pass` FROM `users` WHERE `user_login`=?";
+    $pdoStat = $pdo->prepare($query);
+    $pdoStat->execute([$login]);
+    $user = $pdoStat->fetch(PDO::FETCH_ASSOC);
+    if ($login === $user['user_login'] && password_verify($pass, $user['user_pass'])) {
+        session_start();
+        $_SESSION['id'] = $user['user_id'];
+        return true;
+    };
+    return false;
+};
+
+function userInfo()
+{
+    session_start();
+    $userId = $_SESSION['id'];
+    $pdo = db();
+    $query = "SELECT `user_login`, `user_name`, images.img_path FROM `users` JOIN `images` USING(`user_id`) WHERE `users`.`user_id`=? AND `images`.`img_select`=?";
+    $pdoStat = $pdo->prepare($query);
+    $pdoStat->execute([$userId, 1]);
+    return $pdoStat->fetch(PDO::FETCH_ASSOC);
+}
+
+function userAddImage($path)
+{
+    session_start();
+    $userId = $_SESSION['id'];
+    $pdo = db();
+    $query = "INSERT INTO `images`(`img_path`, `user_id`) VALUES (?,?)";
+    $pdoStat = $pdo->prepare($query);
+    return $pdoStat->execute([$path, $userId]);
+}
+function userGetImages()
+{
+    session_start();
+    $userId = $_SESSION['id'];
+    $pdo = db();
+    $query = "SELECT `img_id`, `img_path`, `user_id`, `img_select` FROM `images` WHERE `user_id`=?";
+    $pdoStat = $pdo->prepare($query);
+    $pdoStat->execute([$userId]);
+    return $pdoStat->fetchAll(PDO::FETCH_ASSOC);
+}
+function userChangeAva($imgId)
+{
+    session_start();
+    $userId = $_SESSION['id'];
+    $pdo = db();
+    $query = "UPDATE `images` SET `img_select`= 0 WHERE `user_id` = ?";
+    $pdoStat = $pdo->prepare($query);
+    $result = $pdoStat->execute([$userId]);
+    if ($result) {
+        $query = "UPDATE `images` SET `img_select`= 1 WHERE `user_id` = ? AND `img_id`= ?";
+        $pdoStat = $pdo->prepare($query);
+        return $pdoStat->execute([$userId, $imgId]);
+    }
+}
+function userDelImage($imgId)
+{
+    session_start();
+    $userId = $_SESSION['id'];
+    $pdo = db();
+    $query = "SELECT `img_select`, `img_path` FROM `images` WHERE `user_id`=? AND `img_id`=?";
+    $pdoStat = $pdo->prepare($query);
+    $pdoStat->execute([$userId, $imgId]);
+    $user = $pdoStat->fetch(PDO::FETCH_ASSOC);
+    if ($user['img_select'] != 1) {
+        unlink("../../{$user['img_path']}");
+        $query = "DELETE FROM `images` WHERE `user_id`=? AND `img_id`=?";
+        $pdoStat = $pdo->prepare($query);
+        return $pdoStat->execute([$userId, $imgId]);
+    } else {
+        return false;
+    }
+}

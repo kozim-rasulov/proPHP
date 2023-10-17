@@ -3,7 +3,9 @@
         <h2 class="head__title"><?= $title ?></h2>
         <p class="head__date"><?= $date ?></p>
     </section>
-
+    <? if ($_GET['error'] === 'reg') : ?>
+        <p style="color: red">Не удалось зарегистрироваться</p>
+    <? endif; ?>
     <form action="./includes/userConfig/userReg.php" class="form" method="post" enctype="multipart/form-data">
         <label class="form__label">
             <span class="form__text">Логин</span>
