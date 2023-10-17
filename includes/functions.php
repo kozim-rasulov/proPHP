@@ -10,6 +10,8 @@ $page = [
     'calc' => ['name' => 'Калькулятор', 'icon' => 'fas fa-calculator-alt'],
     'slide' => ['name' => 'Слайдер', 'icon' => 'far fa-presentation'],
     'guest' => ['name' => 'Гостевая книга', 'icon' => 'fal fa-books'],
+    'login' => ['name' => 'Вход в систему'],
+    'registration' => ['name' => 'Регистрация'],
 ];
 $title = $page[$route]['name'];
 

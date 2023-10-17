@@ -15,8 +15,8 @@
         <header class="header">
             <a href="/" class="logo">PROWEB</a>
             <div class="singIn">
-                <a href="/page/login.php" class="singIn__link">Вход</a>
-                <a href="/page/registration.php" class="singIn__link">Регистрация</a>
+                <a href="/?route=login" class="singIn__link">Вход</a>
+                <a href="/?route=registration" class="singIn__link">Регистрация</a>
             </div>
             <div class="user">
                 <div class="user__profile">

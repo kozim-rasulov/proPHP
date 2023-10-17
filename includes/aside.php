@@ -8,12 +8,16 @@
     <ul class="menu__list">
         <? foreach ($page as $key => $value) : ?>
 
-            <li>
-                <a href="?route=<?= $key ?>" class="menu__list-link <?= $route == $key ? 'active' : '' ?>">
-                    <i class="<?= $value['icon'] ?>"></i>
-                    <?= $value['name'] ?>
-                </a>
-            </li>
+            <? if (isset($value['icon'])) : ?>
+
+                <li>
+                    <a href="?route=<?= $key ?>" class="menu__list-link <?= $route == $key ? 'active' : '' ?>">
+                        <i class="<?= $value['icon'] ?>"></i>
+                        <?= $value['name'] ?>
+                    </a>
+                </li>
+
+            <? endif; ?>
 
         <? endforeach; ?>
     </ul>
