@@ -1,0 +1,14 @@
+<?
+date_default_timezone_set('Asia/Tashkent');
+$route = $_GET['route'] ?? 'home';
+$route = is_readable("./page/$route.php") ? $route : '404';
+
+$page = [
+    'home' => ['name' => 'Главная', 'icon' => 'fal fa-home'],
+    'contact' => ['name' => 'Контакты', 'icon' => 'fal fa-address-book'],
+    'table' => ['name' => 'Таблица умножения', 'icon' => 'fas fa-times'],
+    'calc' => ['name' => 'Калькулятор', 'icon' => 'fas fa-calculator-alt'],
+    'slide' => ['name' => 'Слайдер', 'icon' => 'far fa-presentation'],
+    'guest' => ['name' => 'Гостевая книга', 'icon' => 'fal fa-books'],
+];
+$title = $page[$route]['name'];
