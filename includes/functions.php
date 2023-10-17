@@ -12,3 +12,7 @@ $page = [
     'guest' => ['name' => 'Гостевая книга', 'icon' => 'fal fa-books'],
 ];
 $title = $page[$route]['name'];
+
+$ruMonths = ["Январ", "Февраль", "Март", "Апрель", "Март", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+$ruMonth = $ruMonths[date('n') - 1];
+$date = date("Сегодня d $ruMonth o год");

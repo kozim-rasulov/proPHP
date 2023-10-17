@@ -1,7 +1,7 @@
 <main class="main">
     <section class="head">
-        <h2 class="head__title">Таблица умножения</h2>
-        <p class="head__date">Сегодня 03 Март 2020 год</p>
+        <h2 class="head__title"><?= $title ?></h2>
+        <p class="head__date"><?= $date ?></p>
     </section>
     <form action="" class="form" method="get">
         <label class="form__label">

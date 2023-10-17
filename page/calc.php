@@ -1,9 +1,9 @@
 <main class="main">
     <section class="head">
-        <h2 class="head__title">Таблица умножения</h2>
-        <p class="head__date">Сегодня 03 Март 2020 год</p>
+        <h2 class="head__title"><?= $title ?></h2>
+        <p class="head__date"><?= $date ?></p>
     </section>
-    <form action="" class="form" method="get">
+    <form action="" class="form" method="post">
         <label class="form__label">
             <span class="form__text">Число 1</span>
             <input type="text" class="form__input" name="one" data-type="number">
@@ -28,7 +28,26 @@
         </label>
         <button class="form__btn">Посчитать</button>
 
-
-
+        <?
+        $one = $_POST['one'];
+        $symbol = $_POST['symbol'];
+        $two = $_POST['two'];
+        switch ($symbol) {
+            case '+':
+                $result = $one + $two;
+                break;
+            case '-':
+                $result = $one - $two;
+                break;
+            case '*':
+                $result = $one * $two;
+                break;
+            case '/':
+                $result = $one / $two;
+                break;
+        };
+        echo "<br><br>";
+        echo "<h3>$one $symbol $two = $result</h3>";
+        ?>
     </form>
 </main>

@@ -1,7 +1,7 @@
 <main class="main">
     <section class="head">
-        <h2 class="head__title">Контакты</h2>
-        <p class="head__date">Сегодня 03 Март 2020 год</p>
+        <h2 class="head__title"><?= $title ?></h2>
+        <p class="head__date"><?= $date ?></p>
     </section>
     <secrion class="body">
         <h2 class="body__title">Адрес</h2>
