@@ -21,3 +21,5 @@ $date = date("Сегодня d $ruMonth o год");
 
 $userInfo = userInfo();
 $userImages = userGetImages();
+$comments = getAllComments();
+$editComment = editCommentInfo($_GET['editComm']);

@@ -87,6 +87,7 @@ class INPUT {
         this.prevEl = []
         for (let i = 0; i < this.el.length; i++) {
             this.prevEl.push(element.prev(this.el[i]))
+            if (this.el[i].value.length != 0) this.inputFocus(i)
             this.el[i].addEventListener('focus', () => this.inputFocus(i))
             this.el[i].addEventListener('blur', () => this.inputBlur(i))
             this.el[i].addEventListener('input', () => this.type(i))
